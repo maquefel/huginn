@@ -57,15 +57,15 @@ tcm: imx7
 
 .PHONY: imx7
 
-imx7: Exercicio_05_M4_Main.elf Exercicio_05_M4_Main.bin
+imx7: huginn.elf huginn.bin
 imx7: CFLAGS+= -DCPU_MCIMX7D_M4
 
-Exercicio_05_M4_Main.bin: Exercicio_05_M4_Main.elf
+huginn.bin: huginn.elf
 	$(OBJCOPY) -Obinary $< $@
 
-Exercicio_05_M4_Main.elf: $(OBJS) $(ASM_OBJS)
+huginn.elf: $(OBJS) $(ASM_OBJS)
 	$(CC) $(CFLAGS) -o $@ $(OBJS) $(ASM_OBJS) $(LDFLAGS)
-	$(STRIP) Exercicio_05_M4_Main.elf
+	$(STRIP) huginn.elf
 
 %.o : %.c
 	$(CC) $(CFLAGS) -c $< -o $@ $(INCLUDE)
