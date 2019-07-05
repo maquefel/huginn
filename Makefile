@@ -4,7 +4,6 @@ STRIP=$(CROSS_COMPILE)strip
 
 override CFLAGS+=-Os -fstack-protector-strong -fno-strict-aliasing  -mcpu=cortex-m4  -mfloat-abi=hard  -mfpu=fpv4-sp-d16  -mthumb  -MMD  -MP  -Wall  -fno-common  -ffunction-sections  -fdata-sections  -ffreestanding  -fno-builtin  -mapcs  -std=gnu99
 LDFLAGS+=--specs=nano.specs --specs=nosys.specs -Xlinker --gc-sections  -Xlinker -static  -Xlinker -z  -Xlinker muldefs  -Xlinker --defsym=__stack_size__=0x400  -Xlinker --defsym=__heap_size__=0x4000
-LDFLAGS+=-Tsrc/platform/devices/MCIMX7D/linker/gcc/MCIMX7D_M4_tcm.ld
 
 SRC= \
 src/main.c \
@@ -45,7 +44,16 @@ INCLUDE= \
 
 .PHONY: all
 
-all: imx7
+all: ocram
+
+.PHONY: ocram tcm
+
+ocram: LDFLAGS+=-Tsrc/platform/devices/MCIMX7D/linker/gcc/MCIMX7D_M4_ocram.ld
+ocram: imx7
+
+tcm: imx7
+tcm: LDFLAGS+=-Tsrc/platform/devices/MCIMX7D/linker/gcc/MCIMX7D_M4_tcm.ld
+tcm: imx7
 
 .PHONY: imx7
 
