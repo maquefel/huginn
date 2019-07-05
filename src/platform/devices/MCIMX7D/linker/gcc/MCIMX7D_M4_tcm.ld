@@ -55,6 +55,7 @@ STACK_SIZE = DEFINED(__stack_size__) ? __stack_size__ : 0x0400;
 /* Specify the memory areas */
 MEMORY
 {
+  m_start               (RX)  : ORIGIN = 0x00000000, LENGTH = 0x00008000
   m_interrupts          (RX)  : ORIGIN = 0x1FFF8000, LENGTH = 0x00000240
   m_text                (RX)  : ORIGIN = 0x1FFF8240, LENGTH = 0x00007DC0
   m_data                (RW)  : ORIGIN = 0x20000000, LENGTH = 0x00008000
@@ -192,6 +193,11 @@ SECTIONS
     __END_BSS = .;
   } > m_data
 
+  .resource_table :
+  {
+    KEEP (*(.resource_table*))
+  } > m_data
+
   .heap :
   {
     . = ALIGN(8);
@@ -212,6 +218,12 @@ SECTIONS
   __StackTop   = ORIGIN(m_data) + LENGTH(m_data);
   __StackLimit = __StackTop - STACK_SIZE;
   PROVIDE(__stack = __StackTop);
+
+  .loader :
+  {
+    LONG(__StackTop);
+    LONG(Reset_Handler + 1);
+  } > m_start
 
   .ARM.attributes 0 : { *(.ARM.attributes) }
 
