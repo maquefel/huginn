@@ -36,11 +36,11 @@ INCLUDE= \
 -Isrc/imx7_colibri_m4 \
 -Isrc/platform/devices \
 -Isrc/platform/devices/MCIMX7D/startup \
+-Isrc/platform/devices/MCIMX7D/include/ \
 -Isrc/platform/drivers/inc \
 -Isrc/platform/utilities/inc \
 -Isrc/platform/utilities/src \
--Isrc/platform/CMSIS/Include \
--Isrc/platform/devices/MCIMX7D/include/
+-Icmsis/CMSIS/Core/Include/
 
 .PHONY: all
 
