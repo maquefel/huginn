@@ -14,19 +14,6 @@ src/imx7_colibri_m4/clock_freq.c \
 src/imx7_colibri_m4/gpio_pins.c \
 src/imx7_colibri_m4/pin_mux.c \
 src/imx7_colibri_m4/rsc_table.c \
-src/middleware/multicore/open-amp/common/hil/hil.c \
-src/middleware/multicore/open-amp/common/llist/llist.c \
-src/middleware/multicore/open-amp/common/shm/sh_mem.c \
-src/middleware/multicore/open-amp/porting/config/config.c \
-src/middleware/multicore/open-amp/porting/env/bm/rpmsg_porting.c \
-src/middleware/multicore/open-amp/porting/imx7d_m4/platform.c \
-src/middleware/multicore/open-amp/porting/imx7d_m4/platform_info.c \
-src/middleware/multicore/open-amp/rpmsg/remote_device.c \
-src/middleware/multicore/open-amp/rpmsg/rpmsg.c \
-src/middleware/multicore/open-amp/rpmsg/rpmsg_core.c \
-src/middleware/multicore/open-amp/rpmsg/rpmsg_ext.c \
-src/middleware/multicore/open-amp/virtio/virtio.c \
-src/middleware/multicore/open-amp/virtio/virtqueue.c \
 src/platform/devices/MCIMX7D/startup/system_MCIMX7D_M4.c \
 src/platform/drivers/src/ccm_analog_imx7d.c \
 src/platform/drivers/src/ccm_imx7d.c \
@@ -48,15 +35,6 @@ ASM_OBJS=$(ASM:%.S=%.o)
 
 INCLUDE= \
 -Isrc/imx7_colibri_m4 \
--Isrc/middleware/multicore/open-amp \
--Isrc/middleware/multicore/open-amp/common/hil \
--Isrc/middleware/multicore/open-amp/common/llist \
--Isrc/middleware/multicore/open-amp/common/shm \
--Isrc/middleware/multicore/open-amp/porting/config \
--Isrc/middleware/multicore/open-amp/porting/env \
--Isrc/middleware/multicore/open-amp/porting/env/bm \
--Isrc/middleware/multicore/open-amp/porting/imx7d_m4 \
--Isrc/middleware/multicore/open-amp/virtio \
 -Isrc/platform/devices \
 -Isrc/platform/devices/MCIMX7D/startup \
 -Isrc/platform/drivers/inc \

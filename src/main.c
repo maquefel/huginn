@@ -9,7 +9,6 @@
 ============================================================================
  */
 
-#include "rpmsg/rpmsg_ext.h"
 #include <string.h>
 #include "assert.h"
 #include "board.h"
@@ -58,50 +57,12 @@ void msleep(int num_msec)
     }
 }
 
-static void rpmsg_read_cb(struct rpmsg_channel *rp_chnl, void *data, int len,
-		void * priv, unsigned long src)
-{
-	memcpy((void*) rpmsg_recv_buffer, data, len);
-	rpmsg_recv_buffer[len] = 0;
-	PRINTF("rpmsg_recv_buffer: %s\r\n", rpmsg_recv_buffer);
-	char * pch;
-	pch = strstr(rpmsg_recv_buffer, "BTN1=");
-	if(pch)
-	{
-		pch = pch + 5;
-		if(*pch == '1')
-		{
-			GPIO_WritePinOutput(gpioLed3.base,gpioLed3.pin, (gpio_pin_action_t) 1);
-		}
-		else if(*pch == '0')
-		{
-			GPIO_WritePinOutput(gpioLed3.base,gpioLed3.pin, (gpio_pin_action_t) 0);
-		}
-	}
-}
-
-/* rpmsg_rx_callback will call into this for a channel creation event*/
-static void rpmsg_channel_created(struct rpmsg_channel *rp_chnl)
-{
-	/* We should give the created rp_chnl handler to app layer */
-	app_chnl = rp_chnl;
-	PRINTF("Name service handshake is done, M4 has setup a rpmsg channel [%d ---> %d]\r\n", app_chnl->src, app_chnl->dst);
-}
-
-static void rpmsg_channel_deleted(struct rpmsg_channel *rp_chnl)
-{
-	rpmsg_destroy_ept(rp_chnl->rp_ept);
-}
-
 /*
  * MU Interrrupt ISR
  */
 void BOARD_MU_HANDLER(void)
 {
-	/*
-	 * calls into rpmsg_handler provided by middleware
-	 */
-	rpmsg_handler();
+
 }
 
 /*!
@@ -109,20 +70,9 @@ void BOARD_MU_HANDLER(void)
  */
 int main(void)
 {
-	struct remote_device *rdev;
 	hardware_init();
 
-    GPIO_Init(gpioLed3.base, &Led3);
-    GPIO_Init(gpioBtn3.base, &Btn3);
-
-	PRINTF("\n\r================= GPIO Functionality==================\n\r");
-
-	//Zera Led3
-	GPIO_WritePinOutput(gpioLed3.base,gpioLed3.pin, (gpio_pin_action_t) btn_value3);
-
-	btn_value3  = GPIO_ReadPinInput(gpioBtn3.base, gpioBtn3.pin);
-	btn_last_value3 = btn_value3;
-	PRINTF("eBotao3 Value %d\n\n\r", btn_value3);
+	PRINTF("\n\r================= Hello ==================\n\r");
 
 	/*
 	 * Prepare for the MU Interrupt
@@ -131,13 +81,6 @@ int main(void)
 	MU_Init(BOARD_MU_BASE_ADDR);
 	NVIC_SetPriority(BOARD_MU_IRQ_NUM, APP_MU_IRQ_PRIORITY);
 	NVIC_EnableIRQ(BOARD_MU_IRQ_NUM);
-
-	/* Print the initial banner */
-	PRINTF("\r\nRPMSG String Echo Bare Metal Demo...\r\n");
-
-	/* RPMSG Init as REMOTE */
-	PRINTF("RPMSG Init as Remote\r\n");
-	rpmsg_init(0, &rdev, rpmsg_channel_created, rpmsg_channel_deleted, rpmsg_read_cb, RPMSG_MASTER);
 
 	/*
 	 * str_echo demo loop
@@ -149,15 +92,6 @@ int main(void)
 	 */
 	while (1)
 	{
-		btn_value3  = GPIO_ReadPinInput(gpioBtn3.base, gpioBtn3.pin);
-		if(btn_value3 != btn_last_value3)
-		{
-			btn_last_value3 = btn_value3;
-			sprintf(tx_buffer, "BTN3=%d\n", btn_value3);
-			tx_buffer_len = strlen(tx_buffer);
-			PRINTF("Sending : \"%s\" [len : %d]\r\n", tx_buffer, tx_buffer_len);
-			rpmsg_send(app_chnl, tx_buffer, tx_buffer_len);
-		}
 		msleep(100);
 	}
 }
