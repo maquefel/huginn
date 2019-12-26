@@ -23,7 +23,15 @@ src/platform/drivers/src/rdc.c \
 src/platform/drivers/src/uart_imx.c \
 src/platform/drivers/src/wdog_imx.c \
 src/platform/utilities/src/debug_console_imx.c \
-src/platform/utilities/src/print_scan.c
+src/platform/utilities/src/print_scan.c \
+rpmsg-lite/lib/rpmsg_lite/porting/platform/imx7d_m4/rpmsg_platform.c \
+rpmsg-lite/lib/rpmsg_lite/porting/environment/rpmsg_env_bm.c \
+rpmsg-lite/lib/rpmsg_lite/rpmsg_lite.c \
+rpmsg-lite/lib/rpmsg_lite/rpmsg_queue.c \
+rpmsg-lite/lib/rpmsg_lite/rpmsg_ns.c \
+rpmsg-lite/lib/virtio/virtqueue.c \
+rpmsg-lite/lib/common/llist.c \
+rpmsg-lite/lib/rpmsg_lite/rpmsg_queue.c
 
 OBJS=$(SRC:%.c=%.o)
 
@@ -33,6 +41,7 @@ src/platform/devices/MCIMX7D/startup/gcc/startup_MCIMX7D_M4.S
 ASM_OBJS=$(ASM:%.S=%.o)
 
 INCLUDE= \
+-Isrc/ \
 -Isrc/imx7_colibri_m4 \
 -Isrc/platform/devices \
 -Isrc/platform/devices/MCIMX7D/startup \
@@ -40,7 +49,9 @@ INCLUDE= \
 -Isrc/platform/drivers/inc \
 -Isrc/platform/utilities/inc \
 -Isrc/platform/utilities/src \
--Icmsis/CMSIS/Core/Include/
+-Icmsis/CMSIS/Core/Include/ \
+-Irpmsg-lite/lib/include/ \
+-Irpmsg-lite/lib/include/platform/imx7d_m4/
 
 .PHONY: all
 

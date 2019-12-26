@@ -59,6 +59,8 @@ struct remote_resource_table {
     uint32_t offset[NO_RESOURCE_ENTRIES];
     /* rpmsg vdev entry */
     struct fw_rsc_vdev rpmsg_vdev;
+    struct fw_rsc_vdev_vring rpmsg_vring0;
+    struct fw_rsc_vdev_vring rpmsg_vring1;
 }__attribute__((packed));
 
 void *get_resource_table (int rsc_id, int *len);
