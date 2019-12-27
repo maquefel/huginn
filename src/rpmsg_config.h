@@ -34,16 +34,11 @@
 
 /* RPMsg config values */
 /* START { */
-#define RL_MS_PER_INTERVAL                   (1)
-
-#define RL_BUFFER_COUNT                       (2)
-
+#define RL_MS_PER_INTERVAL 1
+#define RL_BUFFER_COUNT 2U
 #define RL_BUFFER_PAYLOAD_SIZE       (496)
-
 #define RL_API_HAS_ZEROCOPY              (0)
-
 #define RL_USE_STATIC_API                    (1)
-
 #define RL_USE_MCMGR_IPC_ISR_HANDLER	(0)
 
 #define RL_ASSERT(x)  do{if(!(x))while(1);}while(0);

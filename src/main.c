@@ -8,6 +8,7 @@
  	 	 	   Receive BTN1 status through RPmsg and change LED3 status according to this.
 ============================================================================
  */
+#include "rpmsg_config.h"
 
 #include <string.h>
 #include "assert.h"
@@ -106,15 +107,15 @@ int main(void)
 
     hardware_init();
 
-    PRINTF("\n\r================= Hello ==================\n\r");
+	/*
+	 * Prepare for the MU Interrupt
+	 *  MU (Messaging Unit) must be initialized before rpmsg init is called
+	 */
+	MU_Init(BOARD_MU_BASE_ADDR);
+	NVIC_SetPriority(BOARD_MU_IRQ_NUM, APP_MU_IRQ_PRIORITY);
+	NVIC_EnableIRQ(BOARD_MU_IRQ_NUM);
 
-    /*
-     * Prepare for the MU Interrupt
-     *  MU (Messaging Unit) must be initialized before rpmsg init is called
-     */
-    MU_Init(BOARD_MU_BASE_ADDR);
-    NVIC_SetPriority(BOARD_MU_IRQ_NUM, APP_MU_IRQ_PRIORITY);
-    NVIC_EnableIRQ(BOARD_MU_IRQ_NUM);
+    PRINTF("\n\r================= Hello ==================\n\r");
 
     int ret = env_init();
     if(ret == -1)
@@ -138,12 +139,6 @@ int main(void)
         goto fail;
     }
 
-    //my_rpmsg->tvq
-	//my_rpmsg->rvq
-
-    //ctrl_q = rpmsg_queue_create(my_rpmsg);
-
-
 //    struct rpmsg_lite_endpoint *rpmsg_lite_create_ept(struct rpmsg_lite_instance *rpmsg_lite_dev,
 //                                                      unsigned long addr,
 //                                                      rl_ept_rx_cb_t rx_cb,
@@ -152,7 +147,7 @@ int main(void)
 
 	//ctrl_q = rpmsg_queue_create(my_rpmsg);
 
-	ctrl_ept = rpmsg_lite_create_ept(my_rpmsg, RL_ADDR_ANY, my_callback, rx_cb_data, &ept_context);
+	ctrl_ept = rpmsg_lite_create_ept(my_rpmsg, TC_LOCAL_EPT_ADDR, my_callback, rx_cb_data, &ept_context);
 
 	if(ctrl_ept == RL_NULL)
 	{
@@ -186,7 +181,6 @@ int main(void)
         PRINTF(buf);
         rpmsg_lite_send(my_rpmsg, ctrl_ept, src, buf, len, RL_BLOCK);
     }
-
 
     rpmsg_lite_destroy_ept(my_rpmsg, ctrl_ept);
     //rpmsg_queue_destroy(my_rpmsg, ctrl_q);
