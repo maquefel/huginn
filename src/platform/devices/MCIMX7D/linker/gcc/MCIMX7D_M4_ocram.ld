@@ -49,6 +49,9 @@
 /* Entry Point */
 ENTRY(Reset_Handler)
 
+/* Highest address of the user mode stack */
+_estack = 0x20220000;    /* end of RAM */
+
 HEAP_SIZE  = DEFINED(__heap_size__)  ? __heap_size__  : 0x0400;
 STACK_SIZE = DEFINED(__stack_size__) ? __stack_size__ : 0x0400;
 
@@ -56,13 +59,18 @@ STACK_SIZE = DEFINED(__stack_size__) ? __stack_size__ : 0x0400;
 MEMORY
 {
   m_start               (RX)  : ORIGIN = 0x00000000, LENGTH = 0x00008000
-  m_interrupts          (RX)  : ORIGIN = 0x20210000, LENGTH = 0x00000240
-  m_text                (RX)  : ORIGIN = 0x20210240, LENGTH = 0x00007DC0
+  m_interrupts          (RX)  : ORIGIN = 0x20200000, LENGTH = 0x00000240
+  m_text                (RX)  : ORIGIN = 0x20200240, LENGTH = 0x00007DC0
   m_data                (RW)  : ORIGIN = 0x20000000, LENGTH = 0x00008000
+  m_ipc_shm             (RW)  : ORIGIN = 0x00920000, LENGTH = 0x00008000
 }
 
 __FLASH_START = ORIGIN(m_interrupts);
 __FLASH_END   = ORIGIN(m_text) + LENGTH(m_text);
+
+ /* Symbols needed for OpenAMP to enable rpmsg */
+__OPENAMP_region_start__  = ORIGIN(m_ipc_shm);
+__OPENAMP_region_end__ = ORIGIN(m_ipc_shm)+LENGTH(m_ipc_shm);
 
 /* Define output sections */
 SECTIONS
@@ -198,7 +206,9 @@ SECTIONS
 
   .resource_table :
   {
+    . = ALIGN(4);
     KEEP (*(.resource_table*))
+    . = ALIGN(4);
   } > m_data
 
   .heap :
