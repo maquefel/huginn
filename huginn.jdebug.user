@@ -1,0 +1,16 @@
+
+OpenDocument="main.c", FilePath="/home/nshubin/workshop/continuous-mx/huginn/src/main.c", Line=46
+OpenDocument="startup_MCIMX7D_M4.S", FilePath="/home/nshubin/workshop/continuous-mx/huginn/src/platform/devices/MCIMX7D/startup/gcc/startup_MCIMX7D_M4.S", Line=191
+OpenToolbar="Debug", Floating=0, x=0, y=0
+OpenWindow="Registers 1", DockArea=RIGHT, x=0, y=1, w=789, h=634, FilterBarShown=0, ToolBarShown=0, FilteredItems=[], RefreshRate=1
+OpenWindow="Source Files", DockArea=LEFT, x=0, y=1, w=89, h=470, FilterBarShown=1, ToolBarShown=0
+OpenWindow="Disassembly", DockArea=RIGHT, x=0, y=0, w=789, h=306, FilterBarShown=0, ToolBarShown=0, ExecCountersShown=0, InstEncodingsShown=0
+OpenWindow="Source", x=0, y=0, w=0, h=0, FilterBarShown=0, ToolBarShown=0, ExecCountersShown=0
+OpenWindow="Memory 1", DockArea=BOTTOM, x=1, y=0, w=955, h=114, FilterBarShown=0, ToolBarShown=0, EditorAddress=0xC0
+OpenWindow="Functions", DockArea=LEFT, x=0, y=0, w=89, h=470, FilterBarShown=1, ToolBarShown=0
+OpenWindow="Console", DockArea=BOTTOM, x=0, y=0, w=959, h=114, FilterBarShown=0, ToolBarShown=0
+TableHeader="Functions", SortCol="Name", SortOrder="ASCENDING", VisibleCols=["Name";"Address";"Size";"#Insts";"Source"], ColWidths=[273;77;50;63;196]
+TableHeader="Source Files", SortCol="File", SortOrder="ASCENDING", VisibleCols=["File";"Status";"Size";"#Insts";"Path"], ColWidths=[169;70;50;63;749]
+TableHeader="Power Graph", SortCol="Index", SortOrder="ASCENDING", VisibleCols=["Index";"Time";"Channel 0"], ColWidths=[96;136;144]
+TableHeader="Registers 1", SortCol="Name", SortOrder="ASCENDING", VisibleCols=["Name";"Value";"Description"], ColWidths=[173;105;495]
+TableHeader="RegisterSelectionDialog", SortCol="Name", SortOrder="ASCENDING", VisibleCols=["Auto";"Name";"Address";"Description"], ColWidths=[27;27;27;27]

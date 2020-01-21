@@ -1,3 +1,12 @@
 [submodule "cmsis"]
 	path = cmsis
 	url = https://github.com/ARM-software/CMSIS_5.git
+[submodule "open-amp"]
+	path = open-amp
+	url = https://github.com/OpenAMP/open-amp.git
+[submodule "libmetal"]
+	path = libmetal
+	url = https://github.com/OpenAMP/libmetal.git
+[submodule "freertos"]
+	path = freertos
+	url = https://github.com/aws/amazon-freertos.git
