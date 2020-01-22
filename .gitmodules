@@ -4,3 +4,6 @@
 [submodule "libmetal"]
 	path = libmetal
 	url = https://github.com/OpenAMP/libmetal.git
+[submodule "open-amp"]
+	path = open-amp
+	url = https://github.com/OpenAMP/open-amp.git
