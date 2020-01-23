@@ -86,3 +86,8 @@ huginn.elf: $(OBJS) $(ASM_OBJS)
 
 %.o : %.S
 	$(CC) $(CFLAGS) -c $< -o $@ $(INCLUDE)
+
+clean:
+	rm -rf huginn.bin huginn.elf
+	rm -rf $(OBJS)
+	rm -rf $(ASM_OBJS)	
