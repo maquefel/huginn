@@ -7,7 +7,6 @@ LDFLAGS+=--specs=nano.specs --specs=nosys.specs -Xlinker --gc-sections  -Xlinker
 
 SRC= \
 src/main.c \
-src/openamp.c \
 src/hardware_init.c \
 src/rsc_table.c \
 src/imx7_colibri_m4/board.c \
@@ -55,7 +54,6 @@ INCLUDE= \
 -Isrc/platform/utilities/inc \
 -Isrc/platform/utilities/src \
 -Icmsis/CMSIS/Core/Include \
--Ilibmetal/lib/ \
 -Iinclude
 
 .PHONY: all
