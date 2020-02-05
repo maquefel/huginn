@@ -36,7 +36,8 @@ open-amp/lib/remoteproc/remoteproc_virtio.c \
 open-amp/lib/rpmsg/rpmsg.c \
 open-amp/lib/rpmsg/rpmsg_virtio.c \
 open-amp/lib/virtio/virtio.c \
-open-amp/lib/virtio/virtqueue.c
+open-amp/lib/virtio/virtqueue.c \
+virtual_driver/virt_uart.c
 
 OBJS=$(SRC:%.c=%.o)
 
