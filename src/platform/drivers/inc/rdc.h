@@ -33,7 +33,7 @@
 
 #include <stdint.h>
 #include <stdbool.h>
-#include <assert.h>
+#include <metal/assert.h>
 #include "device_imx.h"
 
 /*!
