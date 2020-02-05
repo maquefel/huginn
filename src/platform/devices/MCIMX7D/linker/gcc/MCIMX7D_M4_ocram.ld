@@ -60,7 +60,7 @@ MEMORY
 {
   m_start               (RX)  : ORIGIN = 0x00000000, LENGTH = 0x00008000
   m_interrupts          (RX)  : ORIGIN = 0x20200000, LENGTH = 0x00000240
-  m_text                (RX)  : ORIGIN = 0x20200240, LENGTH = 0x00007DC0
+  m_text                (RX)  : ORIGIN = 0x20200240, LENGTH = 0x00008000
   m_data                (RW)  : ORIGIN = 0x20000000, LENGTH = 0x00008000
   m_ipc_shm             (RW)  : ORIGIN = 0x00920000, LENGTH = 0x00008000
 }
@@ -206,9 +206,7 @@ SECTIONS
 
   .resource_table :
   {
-    . = ALIGN(4);
     KEEP (*(.resource_table*))
-    . = ALIGN(4);
   } > m_data
 
   .heap :
