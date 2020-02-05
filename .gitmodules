@@ -1,6 +1,7 @@
 [submodule "cmsis"]
 	path = cmsis
-	url = https://github.com/ARM-software/CMSIS_5.git
+	url = ../cmsis.git
+	# url = https://github.com/ARM-software/CMSIS_5.git
 [submodule "libmetal"]
 	path = libmetal
 	url = ../libmetal.git
