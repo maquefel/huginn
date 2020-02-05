@@ -3,7 +3,8 @@
 	url = https://github.com/ARM-software/CMSIS_5.git
 [submodule "libmetal"]
 	path = libmetal
-	url = https://github.com/OpenAMP/libmetal.git
+	url = ../libmetal.git
+	# url = https://github.com/OpenAMP/libmetal.git
 [submodule "open-amp"]
 	path = open-amp
 	url = https://github.com/OpenAMP/open-amp.git
